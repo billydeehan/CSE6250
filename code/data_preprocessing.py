@@ -54,10 +54,6 @@ def df_characteristics(df):
 
   
 def preprocess_data(df):  
-    Y_N_mapping = {
-        'Y': 1,
-        'N': 0
-    }
     
     stage_mapping = {  
         'I': 1,  
@@ -77,9 +73,47 @@ def preprocess_data(df):
         "D": 4
     }
     df['HCC_BCLC_Stage'] = df['HCC_BCLC_Stage'].map(abc_mapping)
+    
+    yn_mapping = {
+        'Y': 1,
+        'N': 0
+    }
+    df['Cancer'] = df['Cancer'].map(yn_mapping)
+    df['Bleed'] = df['Bleed'].map(yn_mapping)
+    df['Cirrhosis'] = df['Cirrhosis'].map(yn_mapping)
+    df['Surveillance_programme'] = df['Surveillance_programme'].map(yn_mapping)
+    df['Date_incident_surveillance_scan'] = df['Date_incident_surveillance_scan'].map(yn_mapping)
+    df['Prev_known_cirrhosis'] = df['Prev_known_cirrhosis'].map(yn_mapping)
+
+    gender_mapping = {
+        'M': 1,
+        'F': 0
+    }
+    df['gender'] = df['gender'].map(gender_mapping)
+    
+    alive_dead_mapping = {
+        'Alive': 1,
+        'Dead': 0
+    }
+    df['Alive_Dead'] = df['Alive_Dead'].map(alive_dead_mapping)
+    
+    effective_mapping = {
+        'Missed': 0,
+        'Inconsistent': 1,
+        'Consistent': 2
+    }
+    df['Surveillance_effectiveness'] = df['Surveillance_effectiveness'].map(effective_mapping)
+    
+    year_mapping = {
+        'Pandemic': 1,
+        'Prepandemic': 0
+    }
+    
     # List of numerical, categorical, and sequential feature names  
-    numerical_features = ['numerical_column1', 'numerical_column2']  
-    categorical_features = ['categorical_column1', 'categorical_column2']  
+    binary_features = ['Cancer', 'Bleed', 'Cirrhosis', 'Surveillance_programme','Date_incident_surveillance_scan', 'Prev_known_cirrhosis', 'gender', 'Alive_Dead']
+    numerical_features = ['Month', 'numerical_column2']  
+    
+    categorical_features = ['Year', 'categorical_column2']  
     sequential_features = ['sequential_column']  # This can be merged with categorical or numerical as needed  
       
     # Preprocessing for numerical data  
