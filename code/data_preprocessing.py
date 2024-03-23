@@ -70,9 +70,13 @@ def preprocess_data(df):
     df['ICC_TNM_Stage'] = df['ICC_TNM_Stage'].map(stage_mapping)  
     
     abc_mapping =  {
-        "A": 0
+        "0": 0,
+        "A": 1,
+        "B": 2,
+        "C": 3,
+        "D": 4
     }
-    
+    df['HCC_BCLC_Stage'] = df['HCC_BCLC_Stage'].map(abc_mapping)
     # List of numerical, categorical, and sequential feature names  
     numerical_features = ['numerical_column1', 'numerical_column2']  
     categorical_features = ['categorical_column1', 'categorical_column2']  
